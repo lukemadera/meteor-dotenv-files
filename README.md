@@ -7,6 +7,7 @@ Load environment variables from file and allow overwriting from a different file
 
 You should only RUN from ONE `.env` file. But you may want to BUILD for
  multiple environments, which is not possible with just one `.env` file.
+
 For example, you want to do a mobile build locally and need to use a production
  configuration for it. This allows having multiple `.env-*` files so you can
  run meteor locally AND build for a different environment as well.
@@ -31,8 +32,24 @@ VAR2=maybe
 
 Then when running the meteor (build) command, set the `ENV_FILE_PATH` variable
  to the environment file you want to use, e.g.
+
 `ENV_FILE_PATH=env/.env2 meteor` to run using the environment variables in
  `env/.env2` as overrides to whatever is set in `.env`.
 
 If no `ENV_FILE_PATH` is set, the default `.env` will be used as normal,
  if it exists.
+
+
+### Meteor settings
+
+You may also use `env_file_path` in `settings.json` to set the file path, e.g.
+
+```js
+{
+  "env_file_path": "env/prod/.env",
+  "public": {
+  }
+}
+```
+
+Then `meteor --settings=env/prod/settings.json`

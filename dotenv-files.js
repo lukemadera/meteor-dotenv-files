@@ -16,3 +16,11 @@ if(process.env.ENV_FILE_PATH) {
     env(path, {overwrite: true});
   }
 }
+
+// Pull from meteor settings as well
+if(Meteor.settings !==undefined && Meteor.settings.env_file_path !==undefined) {
+  path =rootPath + Meteor.settings.env_file_path;
+  if(fs.existsSync(path)) {
+    env(path, {overwrite: true});
+  }
+}
